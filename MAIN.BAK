@@ -52,7 +52,7 @@ void main(){
 	int r;
 	foodMenu();
 	cout<<endl;
-	getch();
+s	getch();
 }
 
 void mainMenu(){
@@ -68,7 +68,7 @@ void foodMenu(){
 		Item d;
 		f.open("foodMenu.txt",ios::in);
 		while(f){
-			f.read(); //COMPLETE IT
+			f.read((char*)&d);
 			if(f.eof())
 				break;
 			d.show();
@@ -79,8 +79,8 @@ void foodMenu(){
 		Item d;
 		fstream f;
 		f.open("foodMenu.txt",ios::app);
-		d.input();//COMPLETE IT
-		f.write();		
+		d.input();
+		f.write((char*)&d);		
 		f.close();
 	}
 	f.close();

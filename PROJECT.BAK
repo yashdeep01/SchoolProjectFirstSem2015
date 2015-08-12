@@ -2,17 +2,6 @@
 #include<conio.h>
 #include<dos.h>
 
-/* In this programme we, LAKSHYA BANSAL & YASHDEEP S DAHIYA, have made a
-   bill generating interface for a restaurant, which in this case appears to
-   be McDonald's. Here, user can generate a bill and extract/view a previosly
-   generated bill. While generating a bill, an option for cancelling the
-   immediate previous item has been given for convenience of the user. We
-   have tried best to keep the programme fluid, organised and attractive.
-   We have put in our best efforts to keep the programme bug-free and kept
-   glitches away as far as possible. Any loop-hole found may have gone
-   unnoticed from our eyes or may be an irrelevant scenario in generating
-   bills.
-*/
 struct order
 {
 	char item;
