@@ -2,17 +2,7 @@
 #include<conio.h>
 #include<dos.h>
 
-/* In this programme we, LAKSHYA BANSAL & YASHDEEP S DAHIYA, have made a
-   bill generating interface for a restaurant, which in this case appears to
-   be McDonald's. Here, user can generate a bill and extract/view a previosly
-   generated bill. While generating a bill, an option for cancelling the
-   immediate previous item has been given for convenience of the user. We
-   have tried best to keep the programme fluid, organised and attractive.
-   We have put in our best efforts to keep the programme bug-free and kept
-   glitches away as far as possible. Any loop-hole found may have gone
-   unnoticed from our eyes or may be an irrelevant scenario in generating
-   bills.
-*/
+
 struct order
 {
 	char item;
@@ -62,21 +52,21 @@ void main()
 void logo()
 {
   cout<<endl<<endl<<endl;
-  cout<<"			      °±±± Û         °±±± Û            \n";    delay(50);
-  cout<<"			     °±±±±± Û       °±±±±± Û           \n";    delay(50);
-  cout<<"			   °±± Û  °±± Û    °±± Û°±± Û          \n";    delay(50);
-  cout<<"			  °±± Û	   °±± Û  °±± Û  °±± Û         \n";    delay(50);
-  cout<<"			 °±± Û	    °±± Û°±± Û    °±± Û        \n";    delay(50);
-  cout<<"			°±± Û	     °±±±± Û       °±± Û       \n";    delay(50);
-  cout<<"			°±± Û	     °°±±± Û        °±± Û      \n";    delay(50);
-  cout<<"			°±± Û	      °±± Û         °±± Û      \n";    delay(50);
-  cout<<"			°±± Û	      °±± Û         °±± Û      \n";    delay(50);
-  cout<<"			°±± Û         °±± Û         °±± Û      \n";    delay(50);
-  cout<<"			°±± Û         °±± Û         °±± Û      \n";    delay(50);
-  cout<<"			°±±± Û        ÜÜÜÜÛ         °±± Û      \n";    delay(50);
-  cout<<"			°±±± Û                      °±± Û      \n";    delay(50);
-  cout<<"			°°±±± Û                    °±±± Û      \n";    delay(50);
-  cout<<"			ÜÜÜÜÜÜÛ                   ÜÜÜÜÜÜÛ       \n";    delay(1200);
+  cout<<"			      Â°Â±Â±Â± Ã›         Â°Â±Â±Â± Ã›            \n";    delay(50);
+  cout<<"			     Â°Â±Â±Â±Â±Â± Ã›       Â°Â±Â±Â±Â±Â± Ã›           \n";    delay(50);
+  cout<<"			   Â°Â±Â± Ã›  Â°Â±Â± Ã›    Â°Â±Â± Ã›Â°Â±Â± Ã›          \n";    delay(50);
+  cout<<"			  Â°Â±Â± Ã›	   Â°Â±Â± Ã›  Â°Â±Â± Ã›  Â°Â±Â± Ã›         \n";    delay(50);
+  cout<<"			 Â°Â±Â± Ã›	    Â°Â±Â± Ã›Â°Â±Â± Ã›    Â°Â±Â± Ã›        \n";    delay(50);
+  cout<<"			Â°Â±Â± Ã›	     Â°Â±Â±Â±Â± Ã›       Â°Â±Â± Ã›       \n";    delay(50);
+  cout<<"			Â°Â±Â± Ã›	     Â°Â°Â±Â±Â± Ã›        Â°Â±Â± Ã›      \n";    delay(50);
+  cout<<"			Â°Â±Â± Ã›	      Â°Â±Â± Ã›         Â°Â±Â± Ã›      \n";    delay(50);
+  cout<<"			Â°Â±Â± Ã›	      Â°Â±Â± Ã›         Â°Â±Â± Ã›      \n";    delay(50);
+  cout<<"			Â°Â±Â± Ã›         Â°Â±Â± Ã›         Â°Â±Â± Ã›      \n";    delay(50);
+  cout<<"			Â°Â±Â± Ã›         Â°Â±Â± Ã›         Â°Â±Â± Ã›      \n";    delay(50);
+  cout<<"			Â°Â±Â±Â± Ã›        ÃœÃœÃœÃœÃ›         Â°Â±Â± Ã›      \n";    delay(50);
+  cout<<"			Â°Â±Â±Â± Ã›                      Â°Â±Â± Ã›      \n";    delay(50);
+  cout<<"			Â°Â°Â±Â±Â± Ã›                    Â°Â±Â±Â± Ã›      \n";    delay(50);
+  cout<<"			ÃœÃœÃœÃœÃœÃœÃ›                   ÃœÃœÃœÃœÃœÃœÃ›       \n";    delay(1200);
   delay(1500);
 
   clrscr();
@@ -108,23 +98,23 @@ void bordermenu()
 	int x,y;
 	for(x=1;x<=80;x++)
 	{
-		gotoxy(x,1);cout<<"±";delay(10);
+		gotoxy(x,1);cout<<"Â±";delay(10);
 	}
 	for(y=1;y<=24;y++)
 	{
-		gotoxy(80,y);cout<<"±";delay(10);
+		gotoxy(80,y);cout<<"Â±";delay(10);
 	}
 	for(x=80;x>=1;x--)
 	{
-		gotoxy(x,24);cout<<"±";delay(10);
+		gotoxy(x,24);cout<<"Â±";delay(10);
 	}
 	for(y=24;y>=1;y--)
 	{
-		gotoxy(1,y);cout<<"±";delay(10);
+		gotoxy(1,y);cout<<"Â±";delay(10);
 	}
 	for(y=2;y<=23;y++)
 	{
-		gotoxy(55,y);cout<<"±";delay(10);
+		gotoxy(55,y);cout<<"Â±";delay(10);
 	}
 }
 //this function is diff from bordermenu as it doesn't animate and does not have delay();
@@ -133,21 +123,21 @@ void borderstatic()
 	int x,y;
 	for(x=1;x<=80;x++)
 	{
-		gotoxy(x,1);cout<<"±";
-		gotoxy(x,24);cout<<"±";
+		gotoxy(x,1);cout<<"Â±";
+		gotoxy(x,24);cout<<"Â±";
 	}
 	for(y=1;y<=24;y++)
 	{
-		gotoxy(80,y);cout<<"±";
-		gotoxy(1,y);cout<<"±";
+		gotoxy(80,y);cout<<"Â±";
+		gotoxy(1,y);cout<<"Â±";
 	}
 	for(x=80;x>=1;x--)
 	{
-		gotoxy(x,24);cout<<"±";
+		gotoxy(x,24);cout<<"Â±";
 	}
 	for(y=2;y<=23;y++)
 	{
-		gotoxy(55,y);cout<<"±";
+		gotoxy(55,y);cout<<"Â±";
 	}
 }
 //this is the border that appears in the bill
