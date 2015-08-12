@@ -86,7 +86,7 @@ void logo()
   gotoxy(40,10);cout<<"Computer Lab!";
 
 }
-
+gadha hai tooooooooooooooooooo
 void menu()
 {
 	gotoxy(11,3);cout<<"ITEM";
