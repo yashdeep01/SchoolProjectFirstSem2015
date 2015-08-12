@@ -11,7 +11,7 @@
    We have put in our best efforts to keep the programme bug-free and kept
    glitches away as far as possible. Any loop-hole found may have gone
    unnoticed from our eyes or may be an irrelevant scenario in generating
-   bills.
+   bills.noooooooooooooooooooooooooooooooooooooo
 */
 struct order
 {
