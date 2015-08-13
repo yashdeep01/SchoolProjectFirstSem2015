@@ -17,46 +17,56 @@ class order{
 		}
 		~order();
 };
-class Item
-{
-		char name[10];
-		int price;
+
+class Item{
+	char name[10];
+	int price;
 	public:
-	
+
 		void input()
 		{
+			cout<<"Enter Item Name:";
 			gets(name);
+			cout<<"Enter price of "<<name<<":";
 			cin>>price;
 		}
 		void show()
 		{
 			cout<<name<<" "<<price<<endl;
 		}
-		char* retname()
+		char* getName()
 		{
 			return name;
 		}
-		int retage()
+		int getPrice()
 		{
 			return price;
 		}
 };
+
+
 void foodMenu();
 void mainMenu();
 
 
 void main(){
 	clrscr();
-
-	fstream f;
 	int r;
-	foodMenu();
-	cout<<endl;
+	mainMenu();
 	getch();
 }
 
 void mainMenu(){
-	cout<<"1.) Food Menu \ng - Generate Bill \ne - extract previous bill \nc - Cancel previous bill \nx - exit";
+	int c=1;
+	while(c!=2){
+		cout<<"1.) Food Menu \ng - Generate Bill \ne - extract previous bill \nc - Cancel previous bill \nx - exit\n\nEnter Choice:";
+		cin>>c;
+		if (c==1)
+		{
+			foodMenu();
+		}
+	}
+
 }
 
 void foodMenu(){
@@ -64,24 +74,29 @@ void foodMenu(){
 	int c;
 	cin>>c;
 	if(c==1){
-		fstream f;
-		Item d;
+		fstream f,g;
+		Data d;
+		char sent[100],price[10];
 		f.open("foodMenu.txt",ios::in);
-		while(f){
-			f.read(); //COMPLETE IT
-			if(f.eof())
-				break;
-			d.show();
+		g.open("price.txt",ios::in);
+		while(!f.eof()){
+			f.getline(sent,100,'\n');
+			g.getline(price,100,'\n');
+
+			cout<<sent<<"  "<<price<<endl;
 		}
-	}
-	if (c==2)
-	{
-		Item d;
-		fstream f;
-		f.open("foodMenu.txt",ios::app);
-		d.input();//COMPLETE IT
-		f.write();		
+		g.close();
 		f.close();
 	}
-	f.close();
+	if (c==2){
+		Item d;
+		fstream itemName,price;
+		itemName.open("foodMenu.txt",ios::app);
+		price.open("price.txt",ios::app);
+		d.input();//COMPLETE IT
+		itemName<<d.getName()<<endl;
+		price<<d.getPrice()<<endl;
+		itemName.close();
+		price.close();
+	}
 }
