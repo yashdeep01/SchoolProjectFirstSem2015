@@ -48,6 +48,7 @@ class Item{
 void foodMenu();
 void mainMenu();
 void orderMenu();
+void readFoodMenu();
 
 void main(){
 	clrscr();
@@ -68,24 +69,28 @@ void mainMenu(){
 	}
 }
 
+void readFoodMenu(){
+	fstream f,g;
+	char sent[100],price[100];
+	f.open("foodMenu.txt",ios::in);
+	g.open("price.txt",ios::in);
+	int i=1;
+	while(!f.eof()){
+		f.getline(sent,100,'\n');
+		g.getline(price,100,'\n');
+		cout<<i<<". "<<sent<<"  "<<price<<endl;
+	}
+	i++;
+	g.close();
+	f.close();
+}
 void foodMenu(){
 	int c=1;
 	while(c<4){
 		cout<<"1)Show Menu \n2)Add Items \n3)Order Items";
 		cin>>c;
 		if(c==1){
-			fstream f,g;
-			char sent[100],price[100];
-			f.open("foodMenu.txt",ios::in);
-			g.open("price.txt",ios::in);
-			while(!f.eof()){
-				f.getline(sent,100,'\n');
-				g.getline(price,100,'\n');
-
-				cout<<sent<<"  "<<price<<endl;
-			}
-			g.close();
-			f.close();
+			readFoodMenu();
 		}
 		if (c==2){
 			Item d;
@@ -107,21 +112,26 @@ void foodMenu(){
 
 void orderMenu(){
 	int j=1;
+	int cost;
+	clrscr();
+	cout<<"Menu\n";
+	readFoodMenu();
 	while(j!=9){
-		clrscr();
-		cout<<"Menu\n";
-		fstream f,g;
-		char sent[100],price[100];
-		f.open("foodMenu.txt",ios::in);
-		g.open("price.txt",ios::in);
-		while(!f.eof()){
-			f.getline(sent,100,'\n');
-			g.getline(price,100,'\n');
-				cout<<sent<<"  "<<price<<endl;
-		}
-		g.close();
-		f.close();
-		cout<<"add corresponing items by number\npress x to exit\n";
+		cout<<"\nadd corresponing items by number\npress x to exit\n";
 		cin>>j;
+		int Quantity;
+		cout<<"Enter Quantity:";cin>>Quantity;
+		char sent[100];
+		fstream price;
+		int l=1;
+		for (int i = 1; i <= j; ++i)
+		{
+			price.getline(sent,100,'\n');
+			if(i==j)
+			{
+				cost=((int)sent) * Quantity;
+			}
+		}
+
 	}
 }
