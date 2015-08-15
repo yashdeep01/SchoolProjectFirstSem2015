@@ -48,8 +48,7 @@ void main()
 	}
 }
 
-void logo()
-{
+void logo(){
   cout<<endl<<endl<<endl;
   cout<<"			      °±±± Û         °±±± Û            \n";    delay(50);
   cout<<"			     °±±±±± Û       °±±±±± Û           \n";    delay(50);
@@ -73,11 +72,9 @@ void logo()
   clrscr();
   gotoxy(30,8);cout<<"At our very own...";       delay(1000);
   gotoxy(40,10);cout<<"Computer Lab!";
-
 }
 
-void menu()
-{
+void menu(){
 	gotoxy(11,3);cout<<"ITEM";
 	gotoxy(25,3);cout<<"PRICE";
 	gotoxy(6,5);cout<<"1. McVeggie        Rs.60";
@@ -85,6 +82,7 @@ void menu()
 	gotoxy(6,7);cout<<"3. McChicken       Rs.70";
 	gotoxy(6,8);cout<<"4. Cold Coffee     Rs.30";
 	gotoxy(6,9);cout<<"5. Soft Serve      Rs.15";
+	
 	gotoxy(4,12);cout<<"1,2..- order corresponding item";
 	gotoxy(6,13);cout<<"c - cancel the previous item";
 	gotoxy(6,14);cout<<"z - generate bill";

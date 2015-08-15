@@ -1,7 +1,8 @@
-#include<iostream.h>
-#include<conio.h>
-#include<dos.h>
-
+#include <fstream.h>
+#include <conio.h>
+#include <dos.h>
+#include <string.h>
+#include <stdlib.h>
 struct order
 {
 	char item;
@@ -14,12 +15,15 @@ void borderstatic();
 void logo();
 int summary(order d[100][100],int x,int cash);       //x is the bill no.
 int input(order d[100][100],int x);
+void makeBill(order d[100][100],int cash,int billnumber);
+void showBill(int billnumber);
+
 void main()
 {
 	clrscr();
-	logo();
+	/*logo();
 	delay(1500);
-	clrscr();
+	clrscr();*/
 	bordermenu();
 	delay(100);
 	order d[100][100];     //2-D Array. x-axis is bill no., y-axis is various items.
@@ -42,7 +46,7 @@ void main()
 		}
 		else if(r>0)   // r>0 is possible only when it has returned anatural no.,ie,bill no.
 		{
-			summary(d,r-1,cash[r-1]); //cash as a parameter
+			showBill(r-1);
 			i--;                     //we recordered it above
 		}
 	}
@@ -50,7 +54,7 @@ void main()
 
 void logo()
 {
-  cout<<endl<<endl<<endl;
+  cout<<"\n"<<"\n"<<"\n";
   cout<<"			      °±±± Û         °±±± Û            \n";    delay(50);
   cout<<"			     °±±±±± Û       °±±±±± Û           \n";    delay(50);
   cout<<"			   °±± Û  °±± Û    °±± Û°±± Û          \n";    delay(50);
@@ -159,7 +163,7 @@ void borderbill()
 int input(order d[100][100],int x)
 {
 	int b,y=0;
-	gotoxy(59,5);cout<<"Bill no. "<<x+1<<endl; //x+1 because it gets values starting from 0
+	gotoxy(59,5);cout<<"Bill no. "<<x+1<<"\n"; //x+1 because it gets values starting from 0
 	do                                        //whereas user thinks bill nos. should start from 1
 	{
 		gotoxy(59,2*y+5);cout<<"Enter choice ";
@@ -228,7 +232,7 @@ int summary(order d[100][100],int x,int cash)
 	int i,total_due,change,a1,a2,b1,b2,c1,c2,d1,d2,e1,e2,y=0,k=5;
 	a1=a2=b1=b2=c1=c2=d1=d2=e1=e2=0; //a2,b2.. no. of occurences of items
 					 //a1,b1..sum of indivdual items
-	gotoxy(62,2);cout<<"Bill no. = "<<x+1<<endl;
+	gotoxy(62,2);cout<<"Bill no. = "<<x+1<<"\n";
 	for(y=0;d[x][y].item!='z';y++)
 	{
 		switch(d[x][y].item)
@@ -322,7 +326,104 @@ int summary(order d[100][100],int x,int cash)
 	gotoxy(23,22);cout<<"Thank you! Please visit us again.";
 	gotoxy(25,23);cout<<"<Press any key to continue>";
 	getch();
+	makeBill(d,cash,x);
 	clrscr();
 	return cash;  //cash returned without caring its new/old bill
 }                     //because if its a new bill cash is stored in main in cash[i];
 		     //n if its old, let it be stored again
+void makeBill(order d[100][100],int cash,int billnumber)
+{
+	int x=billnumber;
+	double total,vat=0.125,svtax=0.048,gtotal;
+	int i,total_due,change,a1,a2,b1,b2,c1,c2,d1,d2,e1,e2,y=0,k=5;
+	a1=a2=b1=b2=c1=c2=d1=d2=e1=e2=0;
+	for(y=0;d[x][y].item!='z';y++)
+	{
+		switch(d[x][y].item)
+		{
+			case '1':a1=a1+(60*d[x][y].qty);
+				a2=a2+d[x][y].qty;
+				break;
+			case '2':b1=b1+(25*d[x][y].qty);
+				b2=b2+d[x][y].qty;
+				break;
+			case '3':c1=c1+(70*d[x][y].qty);
+				c2=c2+d[x][y].qty;
+				break;
+			case '4':d1=d1+(30*d[x][y].qty);
+				d2=d2+d[x][y].qty;
+				break;
+			case '5':e1=e1+(15*d[x][y].qty);
+				e2=e2+d[x][y].qty;
+		}
+	}
+	fstream bill;
+	char c[10];
+	itoa(billnumber,c,10);
+	strcat(c,".txt");
+	bill.open(c,ios::out);
+
+	bill<<" ITEM         PRICE   QTY   TOTAL"<<"\n";
+	if(a2>0)
+	{
+	    bill<<"McVeggie      Rs.60    "<<a2<<"     "<<a1<<"\n";
+	}
+	if(b2>0)
+	{
+		bill<<"McAlooTikki   Rs.25    "<<b2<<"     "<<b1<<"\n";
+	}
+	if(c2>0)
+	{
+		bill<<"McChicken     Rs.70    "<<c2<<"     "<<c1<<"\n";
+	}
+	if(d2>0)
+	{   
+		bill<<"Cold Coffee   Rs.30    "<<d2<<"     "<<d1<<"\n";
+	}
+	if(e2>0)
+	{	
+		bill<<"Soft Serve    Rs.15    "<<e2<<"     "<<e1<<"\n";
+	}
+	total=a1+b1+c1+d1+e1;
+	bill<<"Sub total          = "<<total<<"\n";
+	bill<<"VAT (12.5%)        = "<<vat*total<<"\n";
+	bill<<"Service tax (4.8%) = "<<svtax*total<<"\n";
+	bill<<"Total              = "<<total*(1+vat+svtax)<<"\n";
+	gtotal=total*(1+vat+svtax);
+	bill<<"Rounding off       = "<<"\n";
+	if(gtotal-(int)gtotal<0.5)     //calculations...
+	{
+		gotoxy(43,k);cout<<(int)gtotal-gtotal; k++;
+		total_due=(int)gtotal;
+	}
+	else
+	{
+		gotoxy(43,k);cout<<-1*(gtotal-(int)(gtotal+1)); k++;
+		total_due=(int)gtotal+1;
+	}
+	bill<<"Total Due          = "<<total_due<<"\n"<<"\n"; 
+	
+	bill<<"Cash tendered      = ";
+	bill<<cash<<"\n";
+	bill<<"Change             = "<<cash-total_due<<"\n";
+	bill.close();
+}
+void showBill(int billnumber){
+	clrscr();
+	fstream bill;
+	char c[100];
+	itoa(billnumber,c,10);
+
+	strcat(c,".txt");
+
+	fstream f;
+	f.open(c,ios::in);
+	char sent[100];
+	while(!f.eof()){
+		f.getline(sent,100,'\n');
+		cout<<sent<<endl;
+	}
+	f.close();
+	getch();
+	clrscr();
+}
