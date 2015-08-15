@@ -21,9 +21,9 @@ void showBill(int billnumber);
 void main()
 {
 	clrscr();
-	/*logo();
+	logo();
 	delay(1500);
-	clrscr();*/
+	clrscr();
 	bordermenu();
 	delay(100);
 	order d[100][100];     //2-D Array. x-axis is bill no., y-axis is various items.
