@@ -3,6 +3,12 @@
 #include <dos.h>
 #include <string.h>
 #include <stdlib.h>
+
+/*------------------------TODO--------------------------------*/
+//Struct------->Class
+//Cancel Items Code
+//Check If Order Exists and change the previous checking code
+/*---------------------END-OF-TODO---------------------------*/
 struct order
 {
 	char item;
