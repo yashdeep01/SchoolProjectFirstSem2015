@@ -6,7 +6,6 @@
 
 /*------------------------TODO--------------------------------*/
 //Struct------->Class
-//Cancel Items Code
 //Check If Order Exists and change the previous checking code
 /*---------------------END-OF-TODO---------------------------*/
 struct order
@@ -23,15 +22,19 @@ int summary(order d[100][100],int x,int cash);       //x is the bill no.
 int input(order d[100][100],int x);
 void makeBill(order d[100][100],int cash,int billnumber);
 void showBill(int billnumber);
+void addNumber();
+int checkNumber();
+void init();
 
 void main()
 {
+	//init();
 	clrscr();
-	logo();
+	/*logo();
 	delay(1500);
 	clrscr();
 	bordermenu();
-	delay(100);
+	delay(100);*/
 	order d[100][100];     //2-D Array. x-axis is bill no., y-axis is various items.
 	int r,cash[100];
 	for(int i=0;r!=-1;i++)
@@ -41,6 +44,7 @@ void main()
 		r=input(d,i);
 		if(r==0)
 		{
+			addNumber();
 			clrscr();
 			cash[i]=summary(d,i,0);   //cash is an array in main(), not in summary.
 		}                                //it helps to record to amt entered to extract a bill later
@@ -169,7 +173,7 @@ void borderbill()
 int input(order d[100][100],int x)
 {
 	int b,y=0;
-	gotoxy(59,5);cout<<"Bill no. "<<x+1<<"\n"; //x+1 because it gets values starting from 0
+	//gotoxy(59,5);cout<<"Bill no. "<<checkNumber()+1<<"\n"; //x+1 because it gets values starting from 0
 	do                                        //whereas user thinks bill nos. should start from 1
 	{
 		gotoxy(59,2*y+5);cout<<"Enter choice ";
@@ -191,7 +195,7 @@ int input(order d[100][100],int x)
 		{       clrscr();
 			return 0;
 		}
-		else if(d[x][y].item=='e' && x==0)
+		else if(d[x][y].item=='e' && checkNumber()==0)
 		{
 				gotoxy(59,2*y+5);cout<<"You have not";
 				gotoxy(59,2*y+6);cout<<"generated any";
@@ -203,13 +207,19 @@ int input(order d[100][100],int x)
 				gotoxy(59,2*y+7);cout<<"\t\t";
 				gotoxy(59,2*y+9);cout<<"\t\t";
 			}
-		else if(d[x][y].item=='e' && x>0)
+		else if(d[x][y].item=='e' && checkNumber()>0)
 		{
 				clrscr();
 				gotoxy(32,12);cout<<"Enter bill no. ";
 				gotoxy(47,12);cin>>b;  //b is bill no.
 				clrscr();
-				while(b>x || b<=0) //b > current bill no.
+
+				char c[100];
+				itoa(b-1,c,10);
+
+				strcat(c,".txt");
+				ifstream ifile(c);
+				while(!ifile) //b > current bill no.
 				{
 					gotoxy(30,11);cout<<"Bill does not exist.";
 					gotoxy(30,12);cout<<"Please enter again = ";
@@ -223,7 +233,8 @@ int input(order d[100][100],int x)
 		else         //if he enters anything rubbish
 		{
 			gotoxy(59,2*y+5);cout<<"Incorrect Value";
-			gotoxy(59,2*y+6);cout<<"Please Enter Again.";   delay(800);
+			gotoxy(59,2*y+6);cout<<"Please Enter Again."; 
+			delay(800);
 			gotoxy(59,2*y+5);cout<<"\t\t  ";  //above stmts. deleted after a time
 			gotoxy(59,2*y+6);cout<<"\t\t     ";
 		}                               //when block of code gets over, it goes up bcoz of loop &
@@ -238,7 +249,7 @@ int summary(order d[100][100],int x,int cash)
 	int i,total_due,change,a1,a2,b1,b2,c1,c2,d1,d2,e1,e2,y=0,k=5;
 	a1=a2=b1=b2=c1=c2=d1=d2=e1=e2=0; //a2,b2.. no. of occurences of items
 					 //a1,b1..sum of indivdual items
-	gotoxy(62,2);cout<<"Bill no. = "<<x+1<<"\n";
+	gotoxy(62,2);cout<<"Bill no. = "<<checkNumber()+1<<"\n";
 	for(y=0;d[x][y].item!='z';y++)
 	{
 		switch(d[x][y].item)
@@ -332,7 +343,7 @@ int summary(order d[100][100],int x,int cash)
 	gotoxy(23,22);cout<<"Thank you! Please visit us again.";
 	gotoxy(25,23);cout<<"<Press any key to continue>";
 	getch();
-	makeBill(d,cash,x);
+	makeBill(d,cash,checkNumber());
 	clrscr();
 	return cash;  //cash returned without caring its new/old bill
 }                     //because if its a new bill cash is stored in main in cash[i];
@@ -433,3 +444,43 @@ void showBill(int billnumber){
 	getch();
 	clrscr();
 }
+int checkNumber(){
+	fstream f;
+	f.open("number.txt",ios::in);
+	char sent[100];
+	while(!f.eof()){
+		f.getline(sent,100,'\n');
+	}
+	f.close();
+	int c=atoi(sent);
+	return c;
+}
+void addNumber(){
+	fstream f;
+	f.open("number.txt",ios::in);
+	char sent[100];
+	while(!f.eof()){
+		f.getline(sent,100,'\n');
+	}
+	int c=atoi(sent);
+	f.close();
+	c++;
+	f.open("number.txt",ios::out);
+	f<<c;
+}/*
+void init(){
+	int length;
+	fstream filestr;
+
+	filestr.open("number.txt"); // open your file
+	filestr.seekg(0, ios::end); // put the "cursor" at the end of the file
+	length = filestr.tellg(); // find the position of the cursor
+
+	if ( length == 0 ){
+		filestr<<'0';
+	}
+	else {
+		//do nothing
+	}
+	filestr.close();
+}*/
