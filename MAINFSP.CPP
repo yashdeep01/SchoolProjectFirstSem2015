@@ -50,7 +50,6 @@ void orderMenu();
 void addItems();
 void showMenu();
 void deleteItem();
-void generateBill(int order[50]);
 void showBill(int order[50]);
 //************End*Of*Prototypes*******************//
 
@@ -343,29 +342,6 @@ void deleteItem(){
 	remove("foodMenu.dat");	//stdio.h  - remove org
 	rename("temp.dat","foodMenu.dat");  // - rename new created file to org
 }
-void generateBill(int order[50]){	
-	Data d;
-	fstream f;
-	int price[50]={0};
-	gotoxy(21,3);cout<<"ITEM         PRICE   QTY   TOTAL";
-
-	f.open("foodMenu.dat",ios::in|ios::binary);
-	while(f)
-	{
-		f.read((char*)&d,sizeof(d));
-		if(f.eof())
-			break;
-		int k=0;
-		if(order[k]>0)
-		{
-
-		    d.show(20,k);
-		    gotoxy(43,k); cout<<order[k]<<"     "<<order[k]*d.retPrice();
-		    k++;
-		}          
-	}
-	f.close();
-}
 void showBill(int order[50]){
 	clrscr();
 	borderbill();
@@ -374,7 +350,7 @@ void showBill(int order[50]){
 	int price[50]={0},total=0,k=0,cash=0,i;
 
 	gotoxy(21,3);cout<<"ITEM             PRICE     QTY   TOTAL";
-
+	int y=4;
 	f.open("foodMenu.dat",ios::in|ios::binary);
 	while(f)
 	{
@@ -383,9 +359,10 @@ void showBill(int order[50]){
 			break;
 		if(order[k]>0)
 		{
-		    d.show(20,k+4);
-		    gotoxy(43,k+4); cout<<"      "<<order[k]<<"     "<<order[k]*d.retPrice();
+		    d.show(20,y);
+		    gotoxy(43,y); cout<<"      "<<order[k]<<"     "<<order[k]*d.retPrice();
 		    total+=order[k]*d.retPrice();
+			y++;
 		}          
 		k=k+1;
 	}
@@ -414,14 +391,8 @@ void showBill(int order[50]){
 
 	gotoxy(22,k);cout<<"Total Due          = "<<total_due; k=k+2;
 	gotoxy(22,k);cout<<"Cash tendered      = ";
-	if(cash==0)   //eq with 0 to know its a new bill
-	{
-		gotoxy(43,k);cin>>cash; k++;
-	}
-	else      //old bill getting extracted
-	{
-		gotoxy(43,k);cout<<cash; k++; //here cash is not needed to be array
-	}
+
+	gotoxy(43,k);cin>>cash; k++;
 	while(cash<total_due)
 	{
 		gotoxy(22,k);cout<<"Enter a value > "<<total_due<<" = ";
