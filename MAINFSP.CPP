@@ -7,7 +7,8 @@
 
 //********************Need For Items On Next Page**************************//
 
-class Data{
+class Data
+{
 	private:
 		char item[20];
 		int price;
@@ -46,6 +47,7 @@ void borderbill();
 void menu();
 void editMenu();
 void orderMenu();
+void extract();
 
 void addItems();
 void showMenu(int start,int end);
@@ -53,7 +55,8 @@ void deleteItem();
 void showBill(int order[50]);
 //************End*Of*Prototypes*******************//
 
-void main(){
+void main()
+{
 	clrscr();
 	char choice;
 	smallBorder();
@@ -69,7 +72,7 @@ void main(){
 		switch(choice){
 			case 'm':editMenu();break;
 			case 'o':orderMenu();break;
-			case 'e':break;
+			case 'e':extract();break;
 			case 'x':break;
 		       //	default://add default
 		}
@@ -100,7 +103,8 @@ void borderMenu(){
 		gotoxy(35,y);cout<<"±";delay(10);
 	}
 }
-void borderstatic(){
+void borderstatic()
+{
 	int x,y;
 	for(x=1;x<=80;x++)
 	{
@@ -121,7 +125,8 @@ void borderstatic(){
 		gotoxy(35,y);cout<<"±";
 	}
 }
-void smallBorder(){
+void smallBorder()
+{
 	int x,y;//Set Accoringly to file size
 	for(x=0;x<=55;x++)
 	{
@@ -144,7 +149,8 @@ void smallBorder(){
 		gotoxy(55,y);cout<<"±";delay(10);
 	}
 }
-void smallBorderStatic(){
+void smallBorderStatic()
+{
 	int x,y;//Set Accoringly to file size
 	for(x=0;x<=55;x++)
 	{
@@ -189,17 +195,18 @@ void menu(){
 	gotoxy(24,12);cout<<"e - extract previous bill";
 	gotoxy(24,13);cout<<"x - exit";//Work on it
 }
-void editMenu(){
+void editMenu()
+{
 	clrscr();
 	int c;
 	int start=0,end=10;
 	borderMenu();
 	do
 	{
-
 		clrscr();
 		borderstatic();
-		for (int i = 1; i <=35 ;++i){
+		for (int i = 1; i <=35 ;++i)
+		{
 			gotoxy(i,17);cout<<(char)177;
 		}
 
@@ -214,8 +221,9 @@ void editMenu(){
 
 
 
-		gotoxy(39,3);cout<<"Enter choice:";
+		gotoxy(39,3);cout<<"Enter choice : ";
 		gotoxy(52,3);cin>>c;
+<<<<<<< HEAD
 				switch(c){
 				case 1:addItems();break;
 				case 2:deleteItem();break;
@@ -229,10 +237,18 @@ void editMenu(){
 						start=start+11;
 						end=end+11;
 						break;
+=======
+		switch(c)
+		{
+			case 1:addItems();break;
+			case 2:deleteItem();break;
+			case 3:break;
+>>>>>>> origin/master
 		}
 	} while (c!=3);
 }
-void orderMenu(){
+void orderMenu()
+{
 	clrscr();
 	char c[100];
 	borderMenu();
@@ -241,7 +257,8 @@ void orderMenu(){
 
 	clrscr();
 	borderstatic();
-	for (int i = 1; i <=35 ;++i){
+	for (int i = 1; i <=35 ;++i)
+	{
 		gotoxy(i,17);cout<<(char)177;
 	}
 	gotoxy(11,3);cout<<"ITEM";
@@ -255,14 +272,16 @@ void orderMenu(){
 	gotoxy(6,23);cout<<"n)Go To Next Page Of Menu";//Do It
 
 	int last=0,lastquantity=0;
-	do{
+	do
+	{
 		gotoxy(39,k);cout<<"Enter choice:";
 		gotoxy(52,k);cin>>c;
-			
-		if(atoi(c)>=1 && atoi(c)<=50){
+
+		if(atoi(c)>=1 && atoi(c)<=50)
+		{
 			//order
 			int x=atoi(c);
-			gotoxy(39,k+1);cout<<"enter quantity:";
+			gotoxy(39,k+1);cout<<"Enter quantity:";
 
 			int quantity;
 			gotoxy(54,k+1);cin>>quantity;
@@ -271,21 +290,31 @@ void orderMenu(){
 			last = x-1;
 			lastquantity = quantity;
 		}
-		else if(c[0]=='b'){
+		else if(c[0]=='b')
+		{
 		}
-		else if(c[0]=='c'){
+		else if(c[0]=='c')
+		{
 			order[last]=order[last]-lastquantity;
 			gotoxy(39,k-2);cout<<"                      ";
 			gotoxy(39,k-1);cout<<"                      ";
 			gotoxy(39,k);  cout<<"                      ";
 			k=k-4;
 		}
+<<<<<<< HEAD
 		else if(c[0]=='z'){
+=======
+
+		else if(c[0]=='z')
+		{
+			//generateBill(order);
+>>>>>>> origin/master
 			showBill(order);
 			break;
 		}
 
-		else if(c[0]=='n'){//Code It
+		else if(c[0]=='n')
+		{//Code It
 			getch();
 		}
 
@@ -294,13 +323,30 @@ void orderMenu(){
 	}while(c[0]!='b');
 }
 //-------------------FSTREAM---------------------//
-void addItems(){
+void extract()
+{
+	int bill_no,i=1,fsize,dsize,pos;
+	cout<<"Enter bill no. ";
+	cin>>bill_no;
+	fstream f;
+	f.open("foodMenu.dat",ios::in|ios::binary);
+	fsize=f.tellg(0,ios::end);
+	dsize=sizeof(d);
+	pos=fsize/dsize;
+	while(i<=pos)
+	{
+		if(bill_no==i)
+		{
+
+void addItems()
+{
 	Data d;
 	fstream f;
 	f.open("foodMenu.dat",ios::app|ios::binary);
 	char c;
 	int k=4;
-	do{
+	do
+	{
 		d.input(k);
 		f.write((char*)&d,sizeof(d));
 		gotoxy(39,k+2);cout<<"Do You Wish To Add More Items?(y/n):";
@@ -309,7 +355,12 @@ void addItems(){
 	}while(c!='n');
 	f.close();
 }
+<<<<<<< HEAD
 void showMenu(int start,int end){
+=======
+void showMenu()
+{
+>>>>>>> origin/master
 	Data d;
 	fstream f;
 	f.open("foodMenu.dat",ios::in|ios::binary);
@@ -333,7 +384,8 @@ void showMenu(int start,int end){
 	}
 	f.close();
 }
-void deleteItem(){
+void deleteItem()
+{
 	Data d;
 	fstream f1,f2;
 	char item[20];
@@ -355,7 +407,8 @@ void deleteItem(){
 	remove("foodMenu.dat");	//stdio.h  - remove org
 	rename("temp.dat","foodMenu.dat");  // - rename new created file to org
 }
-void showBill(int order[50]){
+void showBill(int order[50])
+{
 	clrscr();
 	borderbill();
 	Data d;
@@ -380,7 +433,7 @@ void showBill(int order[50]){
 		    gotoxy(27,y); cout<<"      "<<order[k]<<"     "<<order[k]*d.retPrice();
 		    total+=order[k]*d.retPrice();
 			y++;
-		}          
+		}
 		k=k+1;
 	}
 
@@ -395,7 +448,7 @@ void showBill(int order[50]){
 	gtotal=total*(1+vat+svtax);
 	gotoxy(48,k);cout<<"Rounding off       = ";
 
-	if(gtotal-(int)gtotal<0.5)  
+	if(gtotal-(int)gtotal<0.5)
 	{
 		gotoxy(69,k);cout<<(int)gtotal-gtotal; k++;
 		total_due=(int)gtotal;
@@ -428,4 +481,9 @@ void showBill(int order[50]){
 
 
 	getch();
+<<<<<<< HEAD
 }
+=======
+
+}
+>>>>>>> origin/master
