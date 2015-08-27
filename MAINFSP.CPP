@@ -192,7 +192,7 @@ void menu(){
 void editMenu(){
 	clrscr();
 	int c;
-	int start=0,end=5;
+	int start=0,end=10;
 	borderMenu();
 	do
 	{
@@ -315,6 +315,7 @@ void showMenu(int start,int end){
 	f.open("foodMenu.dat",ios::in|ios::binary);
 	int m=0;
 	int k=5;
+	int l=5;
 	while(f)
 	{
 
@@ -323,11 +324,12 @@ void showMenu(int start,int end){
 			break;
 		if (m>=start && m<=end)
 		{
-			gotoxy(2,k);cout<<k-4;
+			gotoxy(2,k);cout<<l-4;
 			d.show(6,k);
+			k++;
 		}
-
-		k++;
+		l++;
+		m++;
 	}
 	f.close();
 }
