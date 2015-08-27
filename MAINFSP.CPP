@@ -167,8 +167,7 @@ void smallBorderStatic(){
 		gotoxy(55,y);cout<<"±";
 	}
 }
-void borderbill()
-{
+void borderbill(){
 	int x,y;                 //x,y are independent variables
 	for(x=0;x<=39;x++)
 	{
@@ -349,7 +348,11 @@ void showBill(int order[50]){
 	fstream f;
 	int price[50]={0},total=0,k=0,cash=0,i;
 
-	gotoxy(21,3);cout<<"ITEM             PRICE     QTY   TOTAL";
+	gotoxy(5,3);cout<<"ITEM             PRICE     QTY   TOTAL";
+	for (int z = 1; z <=23; ++z)
+	{
+		gotoxy(44,z);cout<<"";
+	}
 	int y=4;
 	f.open("foodMenu.dat",ios::in|ios::binary);
 	while(f)
@@ -359,8 +362,8 @@ void showBill(int order[50]){
 			break;
 		if(order[k]>0)
 		{
-		    d.show(20,y);
-		    gotoxy(43,y); cout<<"      "<<order[k]<<"     "<<order[k]*d.retPrice();
+		    d.show(4,y);
+		    gotoxy(27,y); cout<<"      "<<order[k]<<"     "<<order[k]*d.retPrice();
 		    total+=order[k]*d.retPrice();
 			y++;
 		}          
@@ -371,34 +374,34 @@ void showBill(int order[50]){
 	int total_due;
 
 	k=k+5;
-	gotoxy(22,k);cout<<"Sub total          = "<<total; k++;
-	gotoxy(22,k);cout<<"VAT (12.5%)        = "<<vat*total; k++;
-	gotoxy(22,k);cout<<"Service tax (4.8%) = "<<svtax*total; k++;
-	gotoxy(22,k);cout<<"Total              = "<<total*(1+vat+svtax); k++;
+	gotoxy(48,k);cout<<"Sub total          = "<<total; k++;
+	gotoxy(48,k);cout<<"VAT (12.5%)        = "<<vat*total; k++;
+	gotoxy(48,k);cout<<"Service tax (4.8%) = "<<svtax*total; k++;
+	gotoxy(48,k);cout<<"Total              = "<<total*(1+vat+svtax); k++;
 	gtotal=total*(1+vat+svtax);
-	gotoxy(22,k);cout<<"Rounding off       = ";
+	gotoxy(48,k);cout<<"Rounding off       = ";
 
 	if(gtotal-(int)gtotal<0.5)  
 	{
-		gotoxy(43,k);cout<<(int)gtotal-gtotal; k++;
+		gotoxy(69,k);cout<<(int)gtotal-gtotal; k++;
 		total_due=(int)gtotal;
 	}
 	else
 	{
-		gotoxy(43,k);cout<<-1*(gtotal-(int)(gtotal+1)); k++;
+		gotoxy(69,k);cout<<-1*(gtotal-(int)(gtotal+1)); k++;
 		total_due=(int)gtotal+1;
 	}
 
-	gotoxy(22,k);cout<<"Total Due          = "<<total_due; k=k+2;
-	gotoxy(22,k);cout<<"Cash tendered      = ";
+	gotoxy(48,k);cout<<"Total Due          = "<<total_due; k=k+2;
+	gotoxy(48,k);cout<<"Cash tendered      = ";
 
-	gotoxy(43,k);cin>>cash; k++;
+	gotoxy(69,k);cin>>cash; k++;
 	while(cash<total_due)
 	{
-		gotoxy(22,k);cout<<"Enter a value > "<<total_due<<" = ";
-		gotoxy(43,k);cin>>cash;   k++;  //if he enters less cash
+		gotoxy(48,k);cout<<"Enter a value > "<<total_due<<" = ";
+		gotoxy(69,k);cin>>cash;   k++;  //if he enters less cash
 	}
-	gotoxy(22,k);cout<<"Change             = "<<cash-total_due;
+	gotoxy(48,k);cout<<"Change             = "<<cash-total_due;
 	delay(200);
 	for(i=8;i<=24;i++)
 	{
@@ -411,5 +414,4 @@ void showBill(int order[50]){
 
 
 	getch();
-
 }
