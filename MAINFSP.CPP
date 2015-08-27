@@ -48,7 +48,7 @@ void editMenu();
 void orderMenu();
 
 void addItems();
-void showMenu();
+void showMenu(int start,int end);
 void deleteItem();
 void showBill(int order[50]);
 //************End*Of*Prototypes*******************//
@@ -192,6 +192,7 @@ void menu(){
 void editMenu(){
 	clrscr();
 	int c;
+	int start=0,end=5;
 	borderMenu();
 	do
 	{
@@ -204,7 +205,7 @@ void editMenu(){
 
 		gotoxy(11,3);cout<<"ITEM";
 		gotoxy(25,3);cout<<"PRICE";
-		showMenu();
+		showMenu(start,end);
 
 		gotoxy(6,19);cout<<"1)Add Items";
 		gotoxy(6,20);cout<<"2)Delete Items";
@@ -219,6 +220,15 @@ void editMenu(){
 				case 1:addItems();break;
 				case 2:deleteItem();break;
 				case 3:break;
+				case 4:for(int z=2;z<=24;z++){
+							for (int l = 4; l <=16; ++l)
+							{
+								gotoxy(z,l);cout<<" ";
+							}
+						}
+						start=start+11;
+						end=end+11;
+						break;
 		}
 	} while (c!=3);
 }
@@ -236,7 +246,7 @@ void orderMenu(){
 	}
 	gotoxy(11,3);cout<<"ITEM";
 	gotoxy(25,3);cout<<"PRICE";
-	showMenu();
+	showMenu(0,11);
 
 	gotoxy(6,19);cout<<"1,2..... Add Items Accordingly";
 	gotoxy(6,20);cout<<"c)Cancel previous Item";
@@ -271,7 +281,6 @@ void orderMenu(){
 			k=k-4;
 		}
 		else if(c[0]=='z'){
-			//generateBill(order);
 			showBill(order);
 			break;
 		}
@@ -297,24 +306,27 @@ void addItems(){
 		gotoxy(39,k+2);cout<<"Do You Wish To Add More Items?(y/n):";
 		gotoxy(76,k+2);cin>>c;
 		k+=3;
-		showMenu();
 	}while(c!='n');
-	showMenu();
 	f.close();
 }
-void showMenu(){
+void showMenu(int start,int end){
 	Data d;
 	fstream f;
 	f.open("foodMenu.dat",ios::in|ios::binary);
-
+	int m=0;
 	int k=5;
 	while(f)
 	{
+
 		f.read((char*)&d,sizeof(d));
 		if(f.eof())
 			break;
-		gotoxy(2,k);cout<<k-4;
-		d.show(6,k);
+		if (m>=start && m<=end)
+		{
+			gotoxy(2,k);cout<<k-4;
+			d.show(6,k);
+		}
+
 		k++;
 	}
 	f.close();
