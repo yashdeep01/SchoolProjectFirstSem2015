@@ -82,90 +82,90 @@ void borderMenu(){
 	int x,y;//Set Accoringly to file size
 	for(x=1;x<=80;x++)
 	{
-		gotoxy(x,1);cout<<"±";delay(10);
+		gotoxy(x,1);cout<<"Â±";delay(10);
 	}
 	for(y=1;y<=24;y++)
 	{
-		gotoxy(80,y);cout<<"±";delay(10);
+		gotoxy(80,y);cout<<"Â±";delay(10);
 	}
 	for(x=80;x>=1;x--)
 	{
-		gotoxy(x,24);cout<<"±";delay(10);
+		gotoxy(x,24);cout<<"Â±";delay(10);
 	}
 	for(y=24;y>=1;y--)
 	{
-		gotoxy(1,y);cout<<"±";delay(10);
+		gotoxy(1,y);cout<<"Â±";delay(10);
 	}
 	for(y=2;y<=23;y++)
 	{
-		gotoxy(35,y);cout<<"±";delay(10);
+		gotoxy(35,y);cout<<"Â±";delay(10);
 	}
 }
 void borderstatic(){
 	int x,y;
 	for(x=1;x<=80;x++)
 	{
-		gotoxy(x,1);cout<<"±";
-		gotoxy(x,24);cout<<"±";
+		gotoxy(x,1);cout<<"Â±";
+		gotoxy(x,24);cout<<"Â±";
 	}
 	for(y=1;y<=24;y++)
 	{
-		gotoxy(80,y);cout<<"±";
-		gotoxy(1,y);cout<<"±";
+		gotoxy(80,y);cout<<"Â±";
+		gotoxy(1,y);cout<<"Â±";
 	}
 	for(x=80;x>=1;x--)
 	{
-		gotoxy(x,24);cout<<"±";
+		gotoxy(x,24);cout<<"Â±";
 	}
 	for(y=2;y<=23;y++)
 	{
-		gotoxy(35,y);cout<<"±";
+		gotoxy(35,y);cout<<"Â±";
 	}
 }
 void smallBorder(){
 	int x,y;//Set Accoringly to file size
 	for(x=0;x<=55;x++)
 	{
-		gotoxy(x+20,6);cout<<"±";delay(10);
+		gotoxy(x+20,6);cout<<"Â±";delay(10);
 	}
 	for(y=0;y<=12;y++)
 	{
-		gotoxy(75,y+6);cout<<"±";delay(10);
+		gotoxy(75,y+6);cout<<"Â±";delay(10);
 	}
 	for(x=55;x>=0;x--)
 	{
-		gotoxy(x+20,18);cout<<"±";delay(10);
+		gotoxy(x+20,18);cout<<"Â±";delay(10);
 	}
 	for(y=12;y>=0;y--)
 	{
-		gotoxy(20,y+6);cout<<"±";delay(10);
+		gotoxy(20,y+6);cout<<"Â±";delay(10);
 	}
 	for(y=6;y<=18;y++)
 	{
-		gotoxy(55,y);cout<<"±";delay(10);
+		gotoxy(55,y);cout<<"Â±";delay(10);
 	}
 }
 void smallBorderStatic(){
 	int x,y;//Set Accoringly to file size
 	for(x=0;x<=55;x++)
 	{
-		gotoxy(x+20,6);cout<<"±";
+		gotoxy(x+20,6);cout<<"Â±";
 	}
 	for(y=0;y<=12;y++)
 	{
-		gotoxy(75,y+6);cout<<"±";
+		gotoxy(75,y+6);cout<<"Â±";
 	}
 	for(x=55;x>=0;x--)
 	{
-		gotoxy(x+20,18);cout<<"±";
+		gotoxy(x+20,18);cout<<"Â±";
 	}
 	for(y=12;y>=0;y--)
 	{
-		gotoxy(20,y+6);cout<<"±";
+		gotoxy(20,y+6);cout<<"Â±";
 	}
 	for(y=6;y<=18;y++)
 	{
-		gotoxy(55,y);cout<<"±";
+		gotoxy(55,y);cout<<"Â±";
 	}
 }
 void borderbill(){
