@@ -35,6 +35,19 @@ class Data{
 			return price;
 		}
 };
+class Bill
+{
+	public:
+	int billno,total,cash,change;
+	char itemname[][50];      // 2D array of chars for items
+	int qty[50]={0};	  // array of corresp. qty of items. we'll store them as soon as
+				  // command to generate bill is given		
+		void display();   // will display the bill
+		int retbillno()
+		{
+			return billno;  
+		}
+};
 
 //****************Prototypes**********************//
 void borderMenu();
@@ -432,8 +445,9 @@ void showBill(int order[50]){
 	clrscr();
 	borderbill();
 	Data d;
+	Bill b;
 	fstream f;
-	int price[50]={0},total=0,k=0,cash=0,i;
+	int price[50]={0},total=0,k=0,cash=0,i,p=0;
 
 	gotoxy(5,3);cout<<"ITEM             PRICE     QTY   TOTAL";
 	for (int z = 1; z <=23; ++z)
@@ -452,6 +466,11 @@ void showBill(int order[50]){
 		    d.show(4,y);
 		    gotoxy(27,y); cout<<"      "<<order[k]<<"     "<<order[k]*d.retPrice();
 		    total+=order[k]*d.retPrice();
+
+		    strcpy(b.itemname[p],d.retItem());
+		    b.quantity[p]=order[k];
+		    p++;
+
 			y++;
 		}          
 		k=k+1;
