@@ -353,10 +353,9 @@ void showMenu(int start,int end){
 		if (m>=start && m<=end)
 		{
 
-				gotoxy(2,k);cout<<l-4;
-				d.show(6,k);
-				k++;
-			
+			gotoxy(2,k);cout<<l-4;
+			d.show(6,k);
+			k++;
 		}
 		l++;
 		m++;
