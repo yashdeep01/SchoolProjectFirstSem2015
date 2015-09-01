@@ -193,7 +193,7 @@ void menu(){
 void editMenu(){
 	clrscr();
 	int c;
-	int start=0,end=10;
+	int start=0,end=9;
 	borderMenu();
 	do
 	{
@@ -201,18 +201,18 @@ void editMenu(){
 		clrscr();
 		borderstatic();
 		for (int i = 1; i <=35 ;++i){
-			gotoxy(i,17);cout<<(char)177;
+			gotoxy(i,16);cout<<(char)177;
 		}
 
 		gotoxy(11,3);cout<<"ITEM";
 		gotoxy(25,3);cout<<"PRICE";
 		showMenu(start,end);
 
-		gotoxy(6,19);cout<<"1)Add Items";
-		gotoxy(6,20);cout<<"2)Delete Items";
-		gotoxy(6,21);cout<<"3)Go Back";
-		gotoxy(6,22);cout<<"4)Go To Next Page Of Menu";//Do It
-
+		gotoxy(4,18);cout<<"1)Add Items";
+		gotoxy(4,19);cout<<"2)Delete Items";
+		gotoxy(4,20);cout<<"3)Go Back";
+		gotoxy(4,21);cout<<"4)Go To Next Page Of Menu";//Do It
+		gotoxy(4,22);cout<<"5)Go To Previous Page Of Menu";
 
 
 		gotoxy(39,3);cout<<"Enter choice:";
@@ -223,7 +223,7 @@ void editMenu(){
 				case 3:break;
 				case 4:
 					if((getNoI()-end)<=0){
-							gotoxy(3,16);cout<<"no more pages";
+							gotoxy(3,15);cout<<"no more pages";
 							getch();
 						}
 						else{
@@ -233,13 +233,28 @@ void editMenu(){
 									gotoxy(z,l);cout<<" ";
 								}
 							}	
-							start=start+11;
-							end=end+11;
+							start=start+10;
+							end=end+10;
 
 						}
 
 						break;
+				case 5:if(start<=0){
+					gotoxy(3,15);cout<<"no more pages";
+					getch();
 				}
+				else{
+					for(int z=2;z<=24;z++){
+						for (int l = 4; l <=16; ++l)
+						{
+							gotoxy(z,l);cout<<" ";
+						}
+					}	
+					start=start-10;
+					end=end-10;
+
+				}
+			}
 		} while (c!=3);
 }
 void orderMenu(){
@@ -252,19 +267,20 @@ void orderMenu(){
 	clrscr();
 	borderstatic();
 	for (int i = 1; i <=35 ;++i){
-		gotoxy(i,17);cout<<(char)177;
+		gotoxy(i,16);cout<<(char)177;
 	}
 
-	int start=0,end=10;
+	int start=0,end=9;
 
 	gotoxy(11,3);cout<<"ITEM";
 	gotoxy(25,3);cout<<"PRICE";
 
-	gotoxy(4,19);cout<<"1,2..... Add Items Accordingly";
-	gotoxy(4,20);cout<<"c)Cancel previous Item";
-	gotoxy(4,21);cout<<"z)Generate Bill";
-	gotoxy(4,22);cout<<"b)Go Back";
-	gotoxy(4,23);cout<<"n)Go To Next Page Of Menu";//Do It
+	gotoxy(4,18);cout<<"1,2..... Add Items Accordingly";
+	gotoxy(4,19);cout<<"c)Cancel previous Item";
+	gotoxy(4,20);cout<<"z)Generate Bill";
+	gotoxy(4,21);cout<<"b)Go Back";
+	gotoxy(4,22);cout<<"m)Go To Next Page Of Menu";//Do It
+	gotoxy(4,23);cout<<"n)Go To Previous Page Of Menu";
 
 
 	int last=0,lastquantity=0;
@@ -299,25 +315,53 @@ void orderMenu(){
 			break;
 		}
 
-		else if(c[0]=='n'){
+		else if(c[0]=='m'){
 						if((getNoI()-end)<=0){
-							gotoxy(3,16);cout<<"no more pages";
+							gotoxy(3,15);cout<<"no more pages";
+							getch();
+
+							for (int y = 3; y < 30; ++y)
+							{	
+								gotoxy(y,15);cout<<" ";
+							}	
 						}
 						else{
 							for(int z=2;z<=30;z++){
-								for (int l = 4; l <=16; ++l)
+								for (int l = 4; l <=15; ++l)
 								{
 									gotoxy(z,l);cout<<" ";
 								}
 							}	
-							start=start+11;
-							end=end+11;
+							start=start+10;
+							end=end+10;
 						}	
 						gotoxy(39,k);cout<<"                                   ";
 						k=k-2;
 		}
+		else if(c[0]=='n'){
+			if(start<=0){
+					gotoxy(3,15);cout<<"no more pages";
+					getch();
+					for (int y = 3; y < 30; ++y)
+					{	
+						gotoxy(y,15);cout<<" ";
+					}	
 
+				}
+				else{
+					for(int z=2;z<=24;z++){
+						for (int l = 4; l <=15; ++l)
+						{
+							gotoxy(z,l);cout<<" ";
+						}
+					}	
+					start=start-10;
+					end=end-10;
 
+				}
+				gotoxy(39,k);cout<<"                                   ";
+				k=k-2;
+		}
 		k+=2;
 	}while(c[0]!='b');
 }
