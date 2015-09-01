@@ -82,90 +82,90 @@ void borderMenu(){
 	int x,y;//Set Accoringly to file size
 	for(x=1;x<=80;x++)
 	{
-		gotoxy(x,1);cout<<"Â±";delay(10);
+		gotoxy(x,1);cout<<"±";delay(10);
 	}
 	for(y=1;y<=24;y++)
 	{
-		gotoxy(80,y);cout<<"Â±";delay(10);
+		gotoxy(80,y);cout<<"±";delay(10);
 	}
 	for(x=80;x>=1;x--)
 	{
-		gotoxy(x,24);cout<<"Â±";delay(10);
+		gotoxy(x,24);cout<<"±";delay(10);
 	}
 	for(y=24;y>=1;y--)
 	{
-		gotoxy(1,y);cout<<"Â±";delay(10);
+		gotoxy(1,y);cout<<"±";delay(10);
 	}
 	for(y=2;y<=23;y++)
 	{
-		gotoxy(35,y);cout<<"Â±";delay(10);
+		gotoxy(35,y);cout<<"±";delay(10);
 	}
 }
 void borderstatic(){
 	int x,y;
 	for(x=1;x<=80;x++)
 	{
-		gotoxy(x,1);cout<<"Â±";
-		gotoxy(x,24);cout<<"Â±";
+		gotoxy(x,1);cout<<"±";
+		gotoxy(x,24);cout<<"±";
 	}
 	for(y=1;y<=24;y++)
 	{
-		gotoxy(80,y);cout<<"Â±";
-		gotoxy(1,y);cout<<"Â±";
+		gotoxy(80,y);cout<<"±";
+		gotoxy(1,y);cout<<"±";
 	}
 	for(x=80;x>=1;x--)
 	{
-		gotoxy(x,24);cout<<"Â±";
+		gotoxy(x,24);cout<<"±";
 	}
 	for(y=2;y<=23;y++)
 	{
-		gotoxy(35,y);cout<<"Â±";
+		gotoxy(35,y);cout<<"±";
 	}
 }
 void smallBorder(){
 	int x,y;//Set Accoringly to file size
 	for(x=0;x<=55;x++)
 	{
-		gotoxy(x+20,6);cout<<"Â±";delay(10);
+		gotoxy(x+20,6);cout<<"±";delay(10);
 	}
 	for(y=0;y<=12;y++)
 	{
-		gotoxy(75,y+6);cout<<"Â±";delay(10);
+		gotoxy(75,y+6);cout<<"±";delay(10);
 	}
 	for(x=55;x>=0;x--)
 	{
-		gotoxy(x+20,18);cout<<"Â±";delay(10);
+		gotoxy(x+20,18);cout<<"±";delay(10);
 	}
 	for(y=12;y>=0;y--)
 	{
-		gotoxy(20,y+6);cout<<"Â±";delay(10);
+		gotoxy(20,y+6);cout<<"±";delay(10);
 	}
 	for(y=6;y<=18;y++)
 	{
-		gotoxy(55,y);cout<<"Â±";delay(10);
+		gotoxy(55,y);cout<<"±";delay(10);
 	}
 }
 void smallBorderStatic(){
 	int x,y;//Set Accoringly to file size
 	for(x=0;x<=55;x++)
 	{
-		gotoxy(x+20,6);cout<<"Â±";
+		gotoxy(x+20,6);cout<<"±";
 	}
 	for(y=0;y<=12;y++)
 	{
-		gotoxy(75,y+6);cout<<"Â±";
+		gotoxy(75,y+6);cout<<"±";
 	}
 	for(x=55;x>=0;x--)
 	{
-		gotoxy(x+20,18);cout<<"Â±";
+		gotoxy(x+20,18);cout<<"±";
 	}
 	for(y=12;y>=0;y--)
 	{
-		gotoxy(20,y+6);cout<<"Â±";
+		gotoxy(20,y+6);cout<<"±";
 	}
 	for(y=6;y<=18;y++)
 	{
-		gotoxy(55,y);cout<<"Â±";
+		gotoxy(55,y);cout<<"±";
 	}
 }
 void borderbill(){
@@ -223,7 +223,7 @@ void editMenu(){
 				case 3:break;
 				case 4:
 					if((getNoI()-end)<=0){
-							cout<<"no more pages";
+							gotoxy(3,16);cout<<"no more pages";
 							getch();
 						}
 						else{
@@ -260,11 +260,11 @@ void orderMenu(){
 	gotoxy(11,3);cout<<"ITEM";
 	gotoxy(25,3);cout<<"PRICE";
 
-	gotoxy(6,19);cout<<"1,2..... Add Items Accordingly";
-	gotoxy(6,20);cout<<"c)Cancel previous Item";
-	gotoxy(6,21);cout<<"z)Generate Bill";
-	gotoxy(6,22);cout<<"b)Go Back";
-	gotoxy(6,23);cout<<"n)Go To Next Page Of Menu";//Do It
+	gotoxy(4,19);cout<<"1,2..... Add Items Accordingly";
+	gotoxy(4,20);cout<<"c)Cancel previous Item";
+	gotoxy(4,21);cout<<"z)Generate Bill";
+	gotoxy(4,22);cout<<"b)Go Back";
+	gotoxy(4,23);cout<<"n)Go To Next Page Of Menu";//Do It
 
 
 	int last=0,lastquantity=0;
@@ -280,7 +280,7 @@ void orderMenu(){
 
 			int quantity;
 			gotoxy(54,k+1);cin>>quantity;
-			order[x-1]=quantity;
+			order[x-1]+=quantity;
 
 			last = x-1;
 			lastquantity = quantity;
@@ -300,14 +300,21 @@ void orderMenu(){
 		}
 
 		else if(c[0]=='n'){
-			for(int z=2;z<=28;z++){
-							for (int l = 4; l <=16; ++l)
-							{
-								gotoxy(z,l);cout<<" ";
-							}
+						if((getNoI()-end)<=0){
+							gotoxy(3,16);cout<<"no more pages";
 						}
-						start=start+11;
-						end=end+11;			
+						else{
+							for(int z=2;z<=30;z++){
+								for (int l = 4; l <=16; ++l)
+								{
+									gotoxy(z,l);cout<<" ";
+								}
+							}	
+							start=start+11;
+							end=end+11;
+						}	
+						gotoxy(39,k);cout<<"                                   ";
+						k=k-2;
 		}
 
 
